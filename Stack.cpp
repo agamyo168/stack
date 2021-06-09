@@ -38,7 +38,7 @@ using namespace std;
 */
 int main()
 {
-    stack <int> s1;
+    stack <char> s1;
     int k;
     cin>>k;
     string x[MAX_STACK];
