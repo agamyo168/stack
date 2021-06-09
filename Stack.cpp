@@ -4,7 +4,7 @@
 
 using namespace std;
 
-class Stack
+/*class Stack
 {   private:
     char a[MAX_STACK];
     int size; //how filled the stack is
@@ -24,12 +24,6 @@ class Stack
     {  assert(size>0);
        return a[size-1];
     }
-    char popAll()
-    {
-        assert(size>0);
-
-
-    }
     bool isEmpty()
     {
         if(size == 0)
@@ -41,9 +35,10 @@ class Stack
         size = 0;
     }
 };
+*/
 int main()
 {
-    Stack s1;
+    stack <int> s1;
     int k;
     cin>>k;
     string x[MAX_STACK];
@@ -51,15 +46,11 @@ int main()
     {
         cin>>x[i];
     }
-    /*cout<<"\n\n";
-    for(int i = 0; i <k;++i)
-    {
-        for(int j =0; j<x[i].size(); ++j)
-            cout<<x[i][j]<<" ";
-    }*/
+    int flag;
 
     for(int i = 0; i < k ; ++i)
-        {
+        {   flag = 1;
+
             for(int j = 0; j < x[i].size(); ++j)
             {
                 //Open parentheses
@@ -69,76 +60,33 @@ int main()
                         s1.push(x[i][j]);
                     }
                 //Close parentheses
-                else if((x[i][j] == ')' && s1.top() == '(')||(x[i][j] == '}'&& s1.top() == '{')||(x[i][j] =='>'&& s1.top() =='<')||(x[i][j] == ']'&& s1.top() =='['))
+                else if(!s1.empty()&&((x[i][j] == ')' && s1.top() == '(')||(x[i][j] == '}'&& s1.top() == '{')||(x[i][j] =='>'&& s1.top() =='<')||(x[i][j] == ']'&& s1.top() =='[')))
                         {
                         //cout<<x[i][j]<<" is poped from stack\n";
                         s1.pop();
                         }
-                else
-                {   //parentheses don't match
-                    cout<<"NO\n";
+                else {
+                    cout<<"NO"<<endl;
 
+                    flag = 0;
                     break;
+
                 }
 
             }
 
             //Pushed = popped
             //Missing parentheses
-            if(s1.isEmpty())
-                {cout<<"YES\n";}
-            s1.clear();//Reset the stack for next line
+            if(!s1.empty()&& flag)
+                {cout<<"NO"<<endl;}
+            else if(s1.empty())
+                cout<<"YES"<<endl;
+
+            while(!s1.empty())
+                    s1.pop();
 
         }
 
     return 0;
 }
-//Test Case 1:
-    /*s1.clear();
-            for(int j = 0; j < x[0].size(); ++j)
-            {
-                //Open parentheses
-                if(x[0][j] == '('|| x[0][j] == '{' || x[0][j] =='<'||x[0][j] == '[')
-                    {
-                        cout<<x[0][j]<<" is pushed into stack\n";
-                        s1.push(x[0][j]);
-                    }
-                else if((x[0][j] == ')' && s1.top() == '(')||(x[0][j] == '}'&& s1.top() == '{')||(x[0][j] =='>'&& s1.top() =='<')||(x[0][j] == ']'&& s1.top() =='['))
-                        {
-                        cout<<x[0][j]<<" is poped from stack\n";
-                        s1.pop();
-                        }
-                else
-                {
-                    cout<<"NO\n";
-                    break;
-                }
 
-            }
-            if(s1.isEmpty())
-                cout<<"YES\n";*/
-
-    // Test Case 2:
-   /* s1.clear();
-            for(int j = 0; j < x[1].size(); ++j)
-            {
-                //Open parentheses
-                if(x[1][j] == '('|| x[1][j] == '{' || x[1][j] =='<'||x[1][j] == '[')
-                    {
-                        cout<<x[1][j]<<" is pushed into stack\n";
-                        s1.push(x[1][j]);
-                    }
-                else if((x[1][j] == ')' && s1.top() == '(')||(x[1][j] == '}'&& s1.top() == '{')||(x[1][j] =='>'&& s1.top() =='<')||(x[1][j] == ']'&& s1.top() =='['))
-                        {
-                        cout<<x[1][j]<<" is poped from stack\n";
-                        s1.pop();
-                        }
-                else
-                {
-                    cout<<"NO\n";
-                    break;
-                }
-
-            }
-            if(s1.isEmpty())
-                cout<<"YES\n";*/
